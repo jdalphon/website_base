@@ -7,10 +7,24 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <div class="row">
-        <div class="span12">
-            <%= yield %>
-        </div>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="/">Name/Icon</a>
+        <a class="navbar-btn" href="#">Link 1</a>
+        <a class="navbar-btn" href="#">Link 2</a>
+        <a class="navbar-btn" href="#">Link 3</a>
+        <a class="navbar-btn" style="float:right" href="#">Login</a>
+        <div class="clear"></div>
+      </div>
     </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

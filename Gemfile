@@ -28,11 +28,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'therubyracer'
-
-group :assets do
-    gem 'twitter-bootstrap-rails'
-    gem 'less-rails'
-end
+gem 'twitter-bootstrap-rails'
+gem 'less-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

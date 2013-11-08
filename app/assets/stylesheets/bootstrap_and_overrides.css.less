@@ -28,3 +28,57 @@
 //
 // Example:
 // @linkColor: #ff0000;
+
+.navbar-inner{
+  padding-left: 18%;
+  padding-right: 18%;
+}
+
+.navbar-btn
+{
+  color: #777777;
+  line-height:42px;
+  display:inline-block;
+  position: relative;
+  @media screen and (max-width: 449px) {
+    font-size: 7pt;
+    padding: 0px 5px 0px 5px;
+  }
+  @media screen and (min-width: 450px) {
+    font-size: 9pt;
+    padding: 0px 7px 0px 7px;
+  }
+  @media screen and (min-width: 980px) {
+    font-size: 11pt;
+    padding: 0px 14px 0px 14px;
+  }
+   @media screen and (min-width: 1200px) {
+    font-size: 12pt;
+    padding: 0px 17px 0px 17px;
+  }
+}
+
+.navbar-btn:hover
+{
+  background:#649ce5;
+  text-decoration:none;
+}
+
+.navbar-btn:hover + .ddmenu
+{
+  display: block;
+  position: relative;
+  z-index: -10;
+  @media screen and (max-width: 979px) {
+    font-size: 9pt;
+    left:284px;
+  }
+  @media screen and (min-width: 980px) {
+    font-size: 10pt;
+    left:401px;
+  }
+   @media screen and (min-width: 1200px) {
+    font-size: 11pt;
+    left:447px;
+  }
+}
