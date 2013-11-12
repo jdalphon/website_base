@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="span3">
+    <%= image_tag @gravatar_url, class: "img-rounded" %>
+  </div>
+  <div class="span4">
+    <h4><%=@user.email%></h4>
+    <p><b>Joined:</b> <%= @user.created_at.strftime('%B %d %Y')%></p>
+  </div>
+</div>
