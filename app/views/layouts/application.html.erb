@@ -14,7 +14,17 @@
         <a class="navbar-btn" href="#">Link 1</a>
         <a class="navbar-btn" href="#">Link 2</a>
         <a class="navbar-btn" href="#">Link 3</a>
-        <a class="navbar-btn" style="float:right" href="#">Login</a>
+        <% if defined?(current_user.email) %>
+          <div style="float:right" class="navbar-email">
+            <%= link_to current_user.email, ""%>
+            | <%= link_to 'Logout', destroy_user_session_path, method: :delete%>
+          </div>
+        <% else %>
+          <div style="float:right" class="navbar-email">
+            <%= link_to 'Login', user_session_path%>
+            | <%= link_to 'Register', new_user_registration_path, method: :get%>
+          </div>
+        <% end %>
         <div class="clear"></div>
       </div>
     </div>
