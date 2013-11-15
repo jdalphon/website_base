@@ -28,9 +28,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 # Bootstrap Requirements
-gem 'therubyracer'
-gem 'twitter-bootstrap-rails'
-gem 'less-rails'
+# gem 'therubyracer'
+# gem 'twitter-bootstrap-rails'
+# gem 'less-rails'
 
 # User Authentication
 gem 'devise'
