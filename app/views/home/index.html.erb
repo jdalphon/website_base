@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="span12">
+  <div class="col-lg-12">
     <div id="carousel-example-captions" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carousel-example-captions" data-slide-to="0" class="active"></li>
@@ -37,4 +37,27 @@
       </a>
     </div>
   </div>
-</div>  
+</div>
+<hr/>
+<div class="row"><div class="col-lg-12"><h2>Special Items</h2></div></div>
+<div class="row">
+  <% (1..4).each do |i|%>
+    <div class="col-lg-3">
+      <div class="sharp_item clickableItem">
+        <h4>Item <%=i%></h4>
+        <p>Some text to go with it</p>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="row"><div class="col-lg-12"><h2>Other Special Items</h2></div></div>
+<div class="row">
+  <% (5..8).each do |i|%>
+    <div class="col-lg-3">
+      <div class="sharp_item clickableItem">
+        <h4>Item <%=i%></h4>
+        <p>Some text to go with it</p>
+      </div>
+    </div>
+  <% end %>
+</div>

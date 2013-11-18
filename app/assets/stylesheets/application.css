@@ -14,3 +14,36 @@
  *= require bootstrap/bootstrap-theme
  *= require font-awesome
  */
+
+.sharp_item
+{
+  margin:8px 8px 8px 8px;
+
+  background-color: #e8e8e8;
+
+     -moz-box-shadow: 0 2px 3px 1px #9E9E9E;
+  -webkit-box-shadow: 0 2px 3px 1px #9E9E9E;
+          box-shadow: 0 2px 3px 1px #9E9E9E;
+
+  height: 100px;
+
+  padding: 5px;
+  
+  @media screen and (max-width: 980px) {
+    font-size:0.8em;
+  }
+  @media screen and (min-width: 1200px) {
+    font-size:1em;
+  }
+
+}
+
+.clickableItem
+{
+  cursor:pointer;
+}
+
+.clickableItem:hover
+{
+  background-color: #cfcfcf;
+}
