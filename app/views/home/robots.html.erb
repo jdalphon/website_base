@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-12">
+    <% @robots.each do |robot|%>
+      <div class="col-md-6">
+        <div class="well robot_post">
+          <h4><%= robot.title %></h4>
+          <%= robot.content%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>  
