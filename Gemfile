@@ -38,6 +38,11 @@ gem 'devise'
 # Font-Awesome
 gem 'font-awesome-rails'
 
+#Summernote
+gem 'summernote-rails'
+gem 'font-awesome-rails'
+gem 'bootstrap-sass'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

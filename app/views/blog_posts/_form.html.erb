@@ -26,13 +26,13 @@
     </div>
       <div class="field">
         <%= f.label :content %><br>
-        <%= f.text_area :content, class: 'form-control' %>
+        <%= f.text_area :content, id: "content_summernote" %>
       </div>
     </div>
     <div class="form-group">
       <div class="field">
         <%= f.label :category %><br>
-        <%= f.text_field :category, class: 'form-control' %>
+        <%= f.text_field :category, class: "form-control" %>
       </div>
     </div>
     <%= f.hidden_field :user_id, value: current_user.id%>

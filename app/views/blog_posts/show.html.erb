@@ -4,7 +4,7 @@
     <h4><%= @blog_post.category %></h4>
   </div>
   <div class="panel-body">
-    <%= @blog_post.content %>
+    <%= raw @blog_post.content %>
   </div>  
   <div class="panel-footer">
     <% if current_user.try(:id) == @blog_post.user_id %>

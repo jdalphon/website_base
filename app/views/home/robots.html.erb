@@ -3,8 +3,8 @@
     <% @robots.each do |robot|%>
       <div class="col-md-6">
         <div class="well robot_post">
-          <h4><%= robot.title %></h4>
-          <%= robot.content%>
+          <h4><%= link_to robot.title, blog_post_path(robot.id) %></h4>
+          <%= raw robot.content%>
         </div>
       </div>
     <% end %>
