@@ -1,4 +1,6 @@
 WebsiteBase::Application.routes.draw do
+  resources :lists
+
   resources :blog_posts
 
   devise_for :users

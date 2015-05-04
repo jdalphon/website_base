@@ -1,0 +1,28 @@
+<p>
+  <strong><%= @list.title %></strong>
+</p>
+<div id="list_body">
+  <% if @list.body == ''%>
+    <ul id="main_list">
+    </ul>
+  <% else %>
+    <%= raw @list.body %>
+  <% end %>
+</div>
+
+<span class="form-group">
+  <input type="text" class="form-control" id="new_item_text"/><br/>
+  <button id="add_checkbox" class="btn btn-success">Add as Checkbox</button>
+  <button id="add_text" class="btn btn-success">Add as Text</button>
+</span>
+
+<br/>
+<%= form_for @list do |f| %>
+  <%= f.hidden_field :body, id:'list_body_form' %>
+  <%= f.submit 'Save', class: 'btn btn-primary', id: 'save_button' %>
+<% end %>
+
+
+<br/>
+<%= link_to 'Edit', edit_list_path(@list) %> |
+<%= link_to 'Back', lists_path %>
