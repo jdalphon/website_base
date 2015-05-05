@@ -1,6 +1,41 @@
-<h1>Editing list</h1>
-
-<%= render 'form' %>
+<%= form_for @list do |f| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong><%= f.label :title %></strong><br>
+      <%= f.text_field :title %>
+    </div>
+    <div class="panel-body">  
+      <div id="list_body">
+        <% if @list.body == ''%>
+          <ul id="main_list">
+          </ul>
+        <% else %>
+          <%= raw @list.body %>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="panel-footer">
+      <div class="row">
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="new_item_text"/><br/>
+        </div>
+        <div class="col-md-6">
+          <button id="add_checkbox" class="btn btn-success">Add as Checkbox</button>
+          <button id="add_text" class="btn btn-success">Add as Header</button>
+          <button id="add_break" class="btn btn-success">Add Newline</button>
+        </div>
+      </div>
+      <div class="row"> 
+        <div class="col-md-2">
+        <%= f.hidden_field :body, id:'list_body_form' %>
+        <%= f.submit 'Save', class: 'btn btn-primary', id: 'save_button' %>
+        </div>
+      </div>
+      <br/>
+    </div>
+  </div>
+<% end %>
 
 <%= link_to 'Show', @list %> |
 <%= link_to 'Back', lists_path %>

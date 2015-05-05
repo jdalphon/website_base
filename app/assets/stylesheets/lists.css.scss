@@ -6,3 +6,18 @@
 /*  border: 1px solid black; */
  padding: 3px;
 }
+
+.fa-times-circle{
+ color: red; 
+}
+
+td.list{
+  font-weight: bold;
+  font-size: 1.25em;
+  a{
+    color: blue;
+  }
+  a:hover{
+    color: white;
+  }
+}
