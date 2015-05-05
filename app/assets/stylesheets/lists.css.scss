@@ -2,13 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.list_item{
-/*  border: 1px solid black; */
- padding: 3px;
+.center-vertical{
+  position: relative !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important; 
 }
 
 .fa-times-circle{
  color: red; 
+}
+
+.heading{
+ font-size: 1.75em;
+ font-weight: bold;
+}
+
+.list-heading{
+ min-height: 4em;
+ display:block;
+}
+
+.list_item{
+/*  border: 1px solid black; */
+ padding: 3px;
 }
 
 td.list{
