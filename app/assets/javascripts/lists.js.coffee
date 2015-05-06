@@ -8,11 +8,27 @@ $ ->
 
   window.list_body = $('#list_body')
   
+  if namespace.controller is "lists" and namespace.action is "edit"
+    $("#list_body").sortable()
+  
+    # Edit an element #
+    $(document).on 'dblclick', '.editable', (e) ->
+      unless $(this).hasClass('editing')
+        old = $(this).html()
+        $(this).addClass('editing')
+        $(this).html("<i class='fa fa-floppy-o save-edit'></i><input class='edit-box' type='text' value='#{old}'/>")
+        
+    $(document).on 'click', '.save-edit', (e) ->
+      $(this).parents('.editable').removeClass('editing')
+      $(this).parents('.editable').html($(this).siblings('input').val())
+  
   # Adding a checkbox #
   $('#add_checkbox').click (e) ->
     e.preventDefault()
     position = $('.cursor')
     if position.hasClass('sublist-title')
+      if namespace.controller is "lists" and namespace.action is "edit"
+        position.siblings('.sublist-list').sortable()
       position = position.siblings('ul')
     position.append("
       <div class='checklist-item'>
@@ -20,6 +36,7 @@ $ ->
         <text class='editable'>#{$('#new_item_text').val()}</text>
         <i class='fa fa-times-circle delete-checklist-item'></i>
       </div>")
+    
     $('#new_item_text').val('')
   
   # Adding a  sublist #
@@ -34,17 +51,6 @@ $ ->
         <ul class='sublist-list'></ul>
       </div>") 
     $('#new_item_text').val('')
-  
-  # Edit an element #
-  $(document).on 'dblclick', '.editable', (e) ->
-    unless $(this).hasClass('editing')
-      old = $(this).html()
-      $(this).addClass('editing')
-      $(this).html("<i class='fa fa-floppy-o save-edit'></i><input class='edit-box' type='text' value='#{old}'/>")
-      
-  $(document).on 'click', '.save-edit', (e) ->
-    $(this).parents('.editable').removeClass('editing')
-    $(this).parents('.editable').html($(this).siblings('input').val())
     
   # Selecting a sublist #
   $(document).on 'click', '.sublist-title', (e) ->
@@ -97,6 +103,8 @@ $ ->
   
   $('#save_button').click (e)->
     e.preventDefault()
+    $('.editing').each ()->
+      $(this).find('.save-edit').trigger('click')
     $('i.fa-times-circle').each ()->
       $(this).show()
     $('.cursor').css('background-color','white')
