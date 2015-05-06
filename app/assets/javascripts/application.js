@@ -16,4 +16,5 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require summernote
+//= require list
 //= require_tree .

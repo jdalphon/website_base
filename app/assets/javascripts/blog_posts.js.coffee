@@ -5,3 +5,5 @@
 $ ->
   $('#content_summernote').summernote
     height: 400
+    
+  new List('blog_posts', {valueNames: ['title', 'category']})

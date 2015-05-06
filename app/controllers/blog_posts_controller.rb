@@ -4,7 +4,8 @@ class BlogPostsController < ApplicationController
   # GET /blog_posts
   # GET /blog_posts.json
   def index
-    @blog_posts = BlogPost.all.order('created_at DESC')
+    @blog_posts = BlogPost.search(params[:search]).only_category(params[:category]).order('created_at DESC')
+    @params = params
   end
 
   # GET /blog_posts/1
