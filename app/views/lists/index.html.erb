@@ -1,20 +1,59 @@
-<h1>Lists</h1>
+<% if user_signed_in? %>
   <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-12">
+      <div class="well">
+        <%= form_tag lists_path, method: "get", id: "list_search" do %>
+          <div class="row">
+            <div class="col-xs-3">
+              <h3>Search Lists</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">
+              <%= text_field_tag :search, @params[:search],
+                        class: "form-control",
+                        placeholder: "Search by Title" %>
+            </div>
+            <div class="col-xs-1">
+              <%= submit_tag "Search", name: nil,
+                        class:"btn btn-default"%>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-xs-12" id="lists">
       <table class="table table-striped">
-        <tbody>
+        <thead>
+          <tr>
+            <th class="sort" data-sort="title">Title</th>
+            <th class="sort" data-sort="owner">Owner</th>
+            <th class="sort" data-sort="date">Date</th>
+            <th class="sort" data-sort="completeness">Completeness</th>
+          </tr>
+        </thead>
+        <tbody class="list">
           <% @lists.each do |list| %>
             <tr>
-              <td class='list'><%= link_to list.title, list_path(list) %></td>
-              <td> by: <%= list.user.email %> </td>
-              <td> on: <%= list.created_at.strftime('%b %d, %Y') %><td>
+              <td class="list title"><%= link_to list.title, list_path(list) %></td>
+              <td class="owner"><%= list.user.email %> </td>
+              <td class="date"><%= list.created_at.strftime('%b %d, %Y') %></td>
+              <td class="completeness"><%= list.completeness.to_s%>%</td> 
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
-</div>
+<% else %>
+  <div class="well danger">
+    Sorry, You must be logged in to view lists
+  </div>
+<% end %>
 <div class="row">
   <div class="col-xs-12">
     <% if user_signed_in? %>

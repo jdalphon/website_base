@@ -4,7 +4,12 @@ class ListsController < ApplicationController
   # GET /lists
   # GET /lists.json
   def index
-    @lists = List.all
+    if user_signed_in?
+      @lists = List.only_user(current_user.id).search(params[:search]).order("created_at DESC")
+    else
+      @lsits = nil
+    end
+    @params = params
   end
 
   # GET /lists/1
@@ -69,6 +74,6 @@ class ListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
-      params.require(:list).permit(:user_id, :title, :body)
+      params.require(:list).permit(:user_id, :title, :body, :completeness)
     end
 end

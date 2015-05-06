@@ -8,8 +8,16 @@
   transform: translateY(-50%) !important; 
 }
 
-.fa-times-circle{
- color: red; 
+.checkbox{
+  font-size: 1.2em !important;
+  padding-top: 2px;
+  padding-left: 0px !important;
+}
+
+.delete-checklist-item, .delete-sublist-item {
+  color: red;
+  font-size: 1.1em !important;
+  padding-top: 2px;
 }
 
 .heading{
@@ -23,8 +31,12 @@
 }
 
 .list_item{
-/*  border: 1px solid black; */
  padding: 3px;
+}
+
+.sublist-title{
+  font-weight: bold;
+  font-size: 1.5em;
 }
 
 td.list{

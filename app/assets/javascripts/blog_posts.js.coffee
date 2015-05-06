@@ -5,5 +5,6 @@
 $ ->
   $('#content_summernote').summernote
     height: 400
-    
-  new List('blog_posts', {valueNames: ['title', 'category']})
+  
+  if namespace.controller is "blog_posts" and namespace.action is "index"
+    new List('blog_posts', {valueNames: ['title', 'category']})

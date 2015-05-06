@@ -20,6 +20,7 @@
         <%= form_for @list do |f| %>
           <% if current_user.try(:id) == @list.user_id%>
             <%= f.hidden_field :body, id:'list_body_form' %>
+            <%= f.hidden_field :completeness, id: 'list_completeness' %>
             <%= f.submit 'Save', class: 'btn btn-primary', id: 'save_button' %>
             <%= f.button 'Cancel', class: 'btn btn-danger', id: 'cancel_button'%>
           <% end %>

@@ -5,13 +5,8 @@
       <%= f.text_field :title %>
     </div>
     <div class="panel-body">  
-      <div id="list_body">
-        <% if @list.body == ''%>
-          <ul id="main_list">
-          </ul>
-        <% else %>
-          <%= raw @list.body %>
-        <% end %>
+      <div id="list_body" class="cursor">
+        <%= raw @list.body %>
       </div>
     </div>
     
@@ -22,8 +17,7 @@
         </div>
         <div class="col-md-6">
           <button id="add_checkbox" class="btn btn-success">Add as Checkbox</button>
-          <button id="add_text" class="btn btn-success">Add as Header</button>
-          <button id="add_break" class="btn btn-success">Add Newline</button>
+          <button id="add_sublist" class="btn btn-success">Add as SubList</button>
         </div>
       </div>
       <div class="row"> 
