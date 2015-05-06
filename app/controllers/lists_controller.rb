@@ -1,6 +1,7 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
-
+  before_action :is_owner, only: [:edit, :show]
+  
   # GET /lists
   # GET /lists.json
   def index
@@ -76,4 +77,11 @@ class ListsController < ApplicationController
     def list_params
       params.require(:list).permit(:user_id, :title, :body, :completeness)
     end
+    
+    def is_owner
+      unless current_user.try(:id) == params[:id]
+        redirect_to '/'
+      end
+    end
+    
 end

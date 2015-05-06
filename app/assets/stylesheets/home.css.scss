@@ -2,6 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.outlined{
+/*  background-color: gray !important;
+  border-radius: 5px;
+  opacity: 0.8;
+  filter: alpha(opacity=80); /* For IE8 and earlier */ 
+}
+.outlined p, .outlined h3{
+  color: black !important;
+  font-weight: bold;
+}
 .robot_post{
  height: 330px; 
 }
