@@ -90,7 +90,7 @@ $ ->
 
   window.calculate_completeness = () ->
     num_checkboxes = $('.checkbox').length
-    num_checked = $('.fa-check-square-o').length
+    num_checked = $('.checkbox.fa-check-square-o').length
 
     if num_checkboxes > 0
       completeness = ((num_checked/num_checkboxes)*100).toFixed(2)
