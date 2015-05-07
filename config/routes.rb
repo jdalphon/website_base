@@ -1,15 +1,12 @@
 WebsiteBase::Application.routes.draw do
   resources :lists
-
-  resources :blog_posts
-
+  
   devise_for :users
   resources :users
   
-#   get "home/index"
-  get "robots" => 'home#robots'
-  get "publications" => 'home#publications'
-  root to: "home#index"
+  get "home" => 'home#index'
+
+  root to: "lists#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
