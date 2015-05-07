@@ -79,7 +79,7 @@ class ListsController < ApplicationController
     end
     
     def is_owner
-      unless current_user.try(:id) == params[:id]
+      unless current_user.try(:id) == List.find(params[:id]).user_id
         redirect_to '/'
       end
     end
