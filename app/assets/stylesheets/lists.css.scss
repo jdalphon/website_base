@@ -34,6 +34,11 @@
  padding: 3px;
 }
 
+.sublist_completion{
+  font-size: .6em; 
+  font-weight: normal;
+}
+
 .sublist-title{
   font-weight: bold;
   font-size: 1.5em;
@@ -48,4 +53,9 @@ td.list{
   a:hover{
     color: white;
   }
+}
+
+div#list_body ul
+{
+  list-style-type: none !important;
 }

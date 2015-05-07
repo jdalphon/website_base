@@ -9,14 +9,15 @@ $ ->
   window.list_body = $('#list_body')
   
   if namespace.controller is "lists" and namespace.action is "edit"
-    $("#list_body").sortable()
+        
+    $("#list_body").sortable({items: 'li'})
   
     # Edit an element #
     $(document).on 'dblclick', '.editable', (e) ->
       unless $(this).hasClass('editing')
         old = $(this).html()
         $(this).addClass('editing')
-        $(this).html("<i class='fa fa-floppy-o save-edit'></i><input class='edit-box' type='text' value='#{old}'/>")
+        $(this).html("<i class='fa fa-floppy-o save-edit'></i><input class='edit-box form-control' type='text' value='#{old}'/>")
         
     $(document).on 'click', '.save-edit', (e) ->
       $(this).parents('.editable').removeClass('editing')
@@ -27,30 +28,35 @@ $ ->
     e.preventDefault()
     position = $('.cursor')
     if position.hasClass('sublist-title')
-      if namespace.controller is "lists" and namespace.action is "edit"
-        position.siblings('.sublist-list').sortable()
       position = position.siblings('ul')
     position.append("
-      <div class='checklist-item'>
+      <li class='checklist-item'>
         <i class='fa fa-square-o checkbox'></i>
         <text class='editable'>#{$('#new_item_text').val()}</text>
         <i class='fa fa-times-circle delete-checklist-item'></i>
-      </div>")
-    
+      </li>")
     $('#new_item_text').val('')
-  
+    $('#new_item_text').focus()
+    calculate_completeness()
+    
   # Adding a  sublist #
   $('#add_sublist').click (e) ->
     e.preventDefault()
-    list_body.append("
+    position = $('.cursor')
+    if position.hasClass('sublist-title')
+      position = position.siblings('ul')
+    position.append("<li>
       <div class='sublist'>
         <div class='sublist-title'>
-          <text class='editable'>#{$('#new_item_text').val()}</text> 
+          <text class='editable'>#{$('#new_item_text').val()}</text>
+           
           <i class='fa fa-times-circle delete-sublist-item'></i>
+          <i class='sublist_completion'>(100%)</i>
         </div>
-        <ul class='sublist-list'></ul>
-      </div>") 
+        <ul class='sublist-list unstyled'></ul>
+      </div></li>") 
     $('#new_item_text').val('')
+    $('#new_item_text').focus()
     
   # Selecting a sublist #
   $(document).on 'click', '.sublist-title', (e) ->
@@ -89,13 +95,25 @@ $ ->
     x.remove()
 
   window.calculate_completeness = () ->
+    $('.sublist').each () ->
+      num_checkboxes = $(this).find('.checkbox').length
+      num_checked = $(this).find('.checkbox.fa-check-square-o').length
+      if num_checkboxes > 0
+        completeness = ((num_checked/num_checkboxes)*100).toFixed(2)
+      else
+        completeness = 100
+      console.log $(this).find('.sublist_completion')
+      $(this).find('.sublist_completion').html("(#{completeness}%)")
+
+    #Overall
     num_checkboxes = $('.checkbox').length
     num_checked = $('.checkbox.fa-check-square-o').length
+
 
     if num_checkboxes > 0
       completeness = ((num_checked/num_checkboxes)*100).toFixed(2)
     else
-      completeness = 0
+      completeness = 100
     $('#completeness').html("#{completeness}% Complete")
     completeness
   calculate_completeness();

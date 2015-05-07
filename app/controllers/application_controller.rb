@@ -7,8 +7,13 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_namespace
   
+  before_filter :allow_iframe_requests
+  
   def set_namespace
     @namespace = { action: params[:action], controller: params[:controller] }
   end
   
+  def allow_iframe_requests
+    response.headers.delete('X-Frame-Options')
+  end
 end
