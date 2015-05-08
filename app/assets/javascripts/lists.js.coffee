@@ -10,7 +10,7 @@ $ ->
   
   if namespace.controller is "lists" and namespace.action is "edit"
         
-    $("#list_body").sortable({items: 'li', placeholder: 'placeholder', forcePlaceholderSize: true})
+    $("#list_body").sortable({items: 'li', placeholder: 'list-group-item placeholder', dropOnEmpty: true,tolerance: 'intersect', connectWith: 'ul'})
   
     # Edit an element #
     $(document).on 'dblclick', '.editable', (e) ->
@@ -30,7 +30,7 @@ $ ->
     if position.hasClass('sublist-title')
       position = position.siblings('ul')
     position.append("
-      <li class='checklist-item'>
+      <li class='checklist-item list-group-item'>
         <i class='fa fa-square-o checkbox'></i>
         <text class='editable'>#{$('#new_item_text').val()}</text>
         <i class='fa fa-times-circle delete-checklist-item'></i>
@@ -45,7 +45,7 @@ $ ->
     position = $('.cursor')
     if position.hasClass('sublist-title')
       position = position.siblings('ul')
-    position.append("<li class='unstyled'>
+    position.append("<li class='unstyled list-group-item'>
       <div class='sublist'>
         <div class='sublist-title'>
           <text class='editable'>#{$('#new_item_text').val()}</text>
@@ -53,7 +53,7 @@ $ ->
           <i class='fa fa-times-circle delete-sublist-item'></i>
           <i class='sublist_completion'>(100%)</i>
         </div>
-        <ul class='sublist-list unstyled'></ul>
+        <ul class='sublist-list unstyled list-group'></ul>
       </div></li>") 
     $('#new_item_text').val('')
     $('#new_item_text').focus()
@@ -124,6 +124,8 @@ $ ->
       $(this).find('.save-edit').trigger('click')
     $('i.fa-times-circle').each ()->
       $(this).show()
+    $('ul').addClass('list-group')  
+    $('li').addClass('list-group-item')  
     $('.cursor').css('background-color','white')
     $('.cursor').removeClass('cursor')
     $('#list_body_form').val(list_body.html())
@@ -143,3 +145,5 @@ $ ->
   if namespace.controller is "lists" and namespace.action is "show"
     $('i.fa-times-circle').each ()->
       $(this).hide()
+    $('ul.list-group').removeClass('list-group')
+    $('li.list-group-item').removeClass('list-group-item')

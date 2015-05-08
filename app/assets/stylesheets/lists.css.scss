@@ -35,15 +35,16 @@
 }
 
 .placeholder {
-  background-color: LightGray;
-  border: 1px solid gray;
-  border-radius: 10px;
-  width: 100px;
+  background-color: LightGray !important;
 }
 
 .sublist_completion{
   font-size: .6em; 
   font-weight: normal;
+}
+
+.sublist-list{
+  min-height: 40px;
 }
 
 .sublist-title{
