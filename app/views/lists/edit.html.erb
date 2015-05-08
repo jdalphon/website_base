@@ -1,35 +1,63 @@
-<%= form_for @list do |f| %>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <strong><%= f.label :title %></strong><br>
-      <%= f.text_field :title %>
-    </div>
-    <div class="panel-body">  
-      <div id="list_body" class="cursor sortable unstyled">
-          <%= raw @list.body %>
-      </div>
-    </div>
-    
-    <div class="panel-footer">
-      <div class="row">
-        <div class="col-md-6">
-          <input type="text" class="form-control" id="new_item_text"/><br/>
+<div class="row">
+  <div class="col-xs-8">
+    <%= form_for @list do |f| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong><%= f.label :title %></strong><br>
+          <%= f.text_field :title %>
         </div>
-        <div class="col-md-6">
-          <button id="add_checkbox" class="btn btn-success">Add as Checkbox</button>
-          <button id="add_sublist" class="btn btn-success">Add as SubList</button>
+        <div class="panel-body">  
+          <div id="list_body" class="cursor sortable unstyled">
+              <%= raw @list.body %>
+          </div>
+        </div>
+        
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="new_item_text"/><br/>
+            </div>
+            <div class="col-md-6">
+              <button id="add_checkbox" class="btn btn-success">Add as Checkbox</button>
+              <button id="add_sublist" class="btn btn-success">Add as SubList</button>
+            </div>
+          </div>
+          <div class="row"> 
+            <div class="col-md-4">
+            <%= f.hidden_field :body, id:'list_body_form' %>
+            <%= f.button class: 'btn btn-primary', id: 'save_button', type: 'submit' do%>
+              <i class="fa fa-floppy-o"> Save </i>
+            <% end %>
+            <%= f.button 'Cancel', class: 'btn btn-danger', id: 'cancel_button'%>
+            </div>
+          </div>
+          <br/>
         </div>
       </div>
-      <div class="row"> 
-        <div class="col-md-2">
-        <%= f.hidden_field :body, id:'list_body_form' %>
-        <%= f.submit 'Save', class: 'btn btn-primary', id: 'save_button' %>
-        </div>
-      </div>
+    <% end %>
+  </div>
+  
+  <div class="col-xs-4">
+    <div class="well">
+      <h4>Sublists<h4>
+      <p>To create a <strong>SubList</strong> simply type a name and click "Add as SubList"</p>
+      <p>Clicking on any <strong>SubList</strong> will allow you to start adding to that Sublist</p>
+      <p>Clicking the same <strong>SubList</strong> again will unselect it.</p>
       <br/>
+      <h4>Checkboxes</h4>
+      <p>To create a "CheckBox" simply type a name and click "Add as Checkbox" or hit enter</p>
+      <p>Checkboxes will be added to the end of the current selection</p>
+      <br/>
+      <h4>Editing</h4>
+      <p>Double click any item to edit its text.</p>
+      <p>Hit enter or save to apply the changes</p>
+      <br/>
+      <h4>Reordering</h4>
+      <p>Click and drag on any item to move it to anywhere else.</p>
+      <p>Currently you cannot drag anything into an empty sublist.</p>
+      
+      
     </div>
   </div>
-<% end %>
-
-<%= link_to 'Show', @list %> |
-<%= link_to 'Back', lists_path %>
+  
+</div>

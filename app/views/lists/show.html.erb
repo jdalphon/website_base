@@ -21,8 +21,13 @@
           <% if current_user.try(:id) == @list.user_id%>
             <%= f.hidden_field :body, id:'list_body_form' %>
             <%= f.hidden_field :completeness, id: 'list_completeness' %>
-            <%= f.submit 'Save', class: 'btn btn-primary', id: 'save_button' %>
+            <%= f.button class: 'btn btn-primary', id: 'save_button', type: 'submit' do%>
+              <i class="fa fa-floppy-o"> Save </i>
+            <% end %>
             <%= f.button 'Cancel', class: 'btn btn-danger', id: 'cancel_button'%>
+            <%= link_to edit_list_path(@list), class: 'btn btn-default pull-right' do%>
+              <i class="fa fa-cog"> Edit</i>
+            <% end %>
           <% end %>
         <% end %>
       </div>
@@ -31,5 +36,3 @@
 </div>
   
 <br/>
-<%= link_to 'Edit', edit_list_path(@list) %> |
-<%= link_to 'Back', lists_path %>

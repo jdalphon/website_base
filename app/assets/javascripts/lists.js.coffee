@@ -10,7 +10,7 @@ $ ->
   
   if namespace.controller is "lists" and namespace.action is "edit"
         
-    $("#list_body").sortable({items: 'li'})
+    $("#list_body").sortable({items: 'li', placeholder: 'placeholder', forcePlaceholderSize: true})
   
     # Edit an element #
     $(document).on 'dblclick', '.editable', (e) ->
@@ -45,7 +45,7 @@ $ ->
     position = $('.cursor')
     if position.hasClass('sublist-title')
       position = position.siblings('ul')
-    position.append("<li>
+    position.append("<li class='unstyled'>
       <div class='sublist'>
         <div class='sublist-title'>
           <text class='editable'>#{$('#new_item_text').val()}</text>
@@ -84,13 +84,13 @@ $ ->
 
   # Delete a checklist item
   $(document).on 'click', '.delete-checklist-item', (e) ->
-    x = $(this).parents('div.checklist-item')
+    x = $(this).parents('li.checklist-item')
     x.fadeOut(250)
     x.remove()
     
   $(document).on 'click', '.delete-sublist-item', (e) ->
     e.stopPropagation()
-    x = $(this).parents('div.sublist')
+    x = $(this).closest('li')
     x.fadeOut(250)
     x.remove()
 
@@ -102,7 +102,6 @@ $ ->
         completeness = ((num_checked/num_checkboxes)*100).toFixed(2)
       else
         completeness = 100
-      console.log $(this).find('.sublist_completion')
       $(this).find('.sublist_completion').html("(#{completeness}%)")
 
     #Overall
