@@ -34,6 +34,7 @@
             <th class="sort" data-sort="owner">Owner</th>
             <th class="sort" data-sort="date">Date</th>
             <th class="sort" data-sort="completeness">Completeness</th>
+            <th>Delete List</th>
           </tr>
         </thead>
         <tbody class="list">
@@ -43,6 +44,10 @@
               <td class="owner"><%= list.user.email %> </td>
               <td class="date"><%= list.created_at.strftime('%b %d, %Y') %></td>
               <td class="completeness"><%= list.completeness.to_s%>%</td> 
+              <td>
+                <%= form_tag list_path(list), method: :delete, data: {confirm: 'Are you sure?'} do %>
+                  <%= button_tag type: 'submit', class: 'btn btn-danger' do %><i class='fa fa-times-circle'> Delete</i><%end%>
+                <%end%></td>
             </tr>
           <% end %>
         </tbody>
