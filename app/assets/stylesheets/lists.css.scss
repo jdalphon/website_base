@@ -67,3 +67,19 @@ div#list_body ul
 {
   list-style-type: none !important;
 }
+
+.well-default{
+  background-color: #f5f5f5; 
+  padding: 0px 10px 15px 10px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid LightGray;
+}
+
+.well-success{
+/*   border-radius: 5px; */
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid LightGreen;
+  background-color: #d6e9c6;
+  padding: 0px 10px 15px 10px;
+  
+}

@@ -10,6 +10,7 @@ class ListsController < ApplicationController
     else
       @lsits = nil
     end
+    @new_list = List.new
     @params = params
   end
 
@@ -31,13 +32,14 @@ class ListsController < ApplicationController
   # POST /lists.json
   def create
     @list = List.new(list_params)
-
+    @list.user_id = current_user.try(:id)
     respond_to do |format|
       if @list.save
         format.html { redirect_to @list, notice: 'List was successfully created.' }
         format.json { render action: 'show', status: :created, location: @list }
       else
-        format.html { render action: 'new' }
+        flash[:danger] = @list.errors.full_messages
+        format.html { redirect_to lists_path }
         format.json { render json: @list.errors, status: :unprocessable_entity }
       end
     end

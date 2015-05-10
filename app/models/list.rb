@@ -1,6 +1,8 @@
 class List < ActiveRecord::Base
   belongs_to :user
   
+  validates_presence_of :title
+  
   def self.search(search)
     if search
       where('lower(title) LIKE lower(?)', "%#{search}%")

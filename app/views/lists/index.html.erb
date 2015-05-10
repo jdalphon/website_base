@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <div class="row">
-    <div class="col-xs-12">
-      <div class="well">
+    <div class="col-xs-8">
+      <div class="well-default">
         <%= form_tag lists_path, method: "get", id: "list_search" do %>
           <div class="row">
             <div class="col-xs-3">
@@ -10,7 +10,7 @@
           </div>
           <div class="row">
             <div class="col-xs-4">
-              <%= text_field_tag :search, @params[:search],
+              <%= text_field_tag :search, @params.try(:search),
                         class: "form-control",
                         placeholder: "Search by Title" %>
             </div>
@@ -22,9 +22,24 @@
         <% end %>
       </div>
     </div>
+    <%= form_for @new_list do |f|%>
+      <div class="col-xs-4 well-success">
+        <div class="row">
+          <div class="col-xs-12">
+            <h3>Create a new List</h3>
+          </div>
+          <div class="col-xs-8">
+            <%= f.text_field :title, class: 'form-control', placeholder: 'Groceries, Homework...'%>
+          </div>
+          <div class="col-xs-1">
+            <%= f.button 'Create', class: 'btn btn-success' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 
-
+  <br/>
   <div class="row">
     <div class="col-xs-12" id="lists">
       <table class="table table-striped">
@@ -54,15 +69,9 @@
       </table>
     </div>
   </div>
+
 <% else %>
   <div class="well danger">
     Sorry, You must be logged in to view lists
   </div>
 <% end %>
-<div class="row">
-  <div class="col-xs-12">
-    <% if user_signed_in? %>
-      <%= link_to 'New List', new_list_path, class: 'btn btn-success' %>
-    <% end %>
-  </div>
-</div>
