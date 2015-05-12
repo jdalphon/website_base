@@ -15,7 +15,7 @@ $ ->
     # Edit an element #
     $(document).on 'dblclick', '.editable', (e) ->
       unless $(this).hasClass('editing')
-        old = $(this).html()
+        old = $(this).html().replace(/"/g, "&#34;").replace(/'/g, "&#39;")
         $(this).addClass('editing')
         $(this).html("<i class='fa fa-floppy-o save-edit'></i><input class='edit-box form-control' type='text' value='#{old}'/>")
         
