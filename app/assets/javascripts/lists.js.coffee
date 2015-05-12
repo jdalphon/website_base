@@ -29,12 +29,8 @@ $ ->
     position = $('.cursor')
     if position.hasClass('sublist-title')
       position = position.siblings('ul')
-    position.append("
-      <li class='checklist-item list-group-item'>
-        <i class='fa fa-square-o checkbox'></i>
-        <text class='editable'>#{$('#new_item_text').val()}</text>
-        <i class='fa fa-times-circle delete-checklist-item'></i>
-      </li>")
+    checkbox = HandlebarsTemplates['lists/checkbox']({value: $('#new_item_text').val()})
+    position.append(checkbox)
     $('#new_item_text').val('')
     $('#new_item_text').focus()
     calculate_completeness()
@@ -45,16 +41,8 @@ $ ->
     position = $('.cursor')
     if position.hasClass('sublist-title')
       position = position.siblings('ul')
-    position.append("<li class='unstyled list-group-item'>
-      <div class='sublist'>
-        <div class='sublist-title'>
-          <text class='editable'>#{$('#new_item_text').val()}</text>
-           
-          <i class='fa fa-times-circle delete-sublist-item'></i>
-          <i class='sublist_completion'>(100%)</i>
-        </div>
-        <ul class='sublist-list unstyled list-group'></ul>
-      </div></li>") 
+    sublist = HandlebarsTemplates['lists/sublist']({value: $('#new_item_text').val()})
+    position.append(sublist)
     $('#new_item_text').val('')
     $('#new_item_text').focus()
     

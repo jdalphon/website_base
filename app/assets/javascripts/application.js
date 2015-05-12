@@ -17,4 +17,6 @@
 //= require twitter/bootstrap
 //= require summernote
 //= require list
+//= require handlebars
+//= require_tree ./templates
 //= require_tree .

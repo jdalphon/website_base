@@ -42,6 +42,9 @@ gem 'font-awesome-rails'
 gem 'summernote-rails'
 gem 'bootstrap-sass'
 
+#Handlebars
+gem 'handlebars_assets'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
