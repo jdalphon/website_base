@@ -29,7 +29,7 @@ $ ->
     position = $('.cursor')
     if position.hasClass('sublist-title')
       position = position.siblings('ul')
-    checkbox = HandlebarsTemplates['lists/checkbox']({value: $('#new_item_text').val()})
+    checkbox = $(HandlebarsTemplates['lists/checkbox']({value: $('#new_item_text').val()})).uniqueId()
     position.append(checkbox)
     $('#new_item_text').val('')
     $('#new_item_text').focus()
@@ -41,7 +41,7 @@ $ ->
     position = $('.cursor')
     if position.hasClass('sublist-title')
       position = position.siblings('ul')
-    sublist = HandlebarsTemplates['lists/sublist']({value: $('#new_item_text').val()})
+    sublist = $(HandlebarsTemplates['lists/sublist']({value: $('#new_item_text').val()})).uniqueId()
     position.append(sublist)
     $('#new_item_text').val('')
     $('#new_item_text').focus()
@@ -116,7 +116,9 @@ $ ->
     $('li').addClass('list-group-item')  
     $('.cursor').css('background-color','white')
     $('.cursor').removeClass('cursor')
-    $('#list_body_form').val(list_body.html())
+    window.list = {}
+    listToJSON($('#list_body'), window.list)
+    $('#list_body_form').val(JSON.stringify(window.list))
     $('#list_completeness').val(calculate_completeness())
     $('.edit_list').submit()
   
@@ -135,3 +137,35 @@ $ ->
       $(this).hide()
     $('ul.list-group').removeClass('list-group')
     $('li.list-group-item').removeClass('list-group-item')
+    
+    
+  window.list = {}
+  window.listToJSON = (obj, list_level) ->
+    for item in obj.children('li')
+      item = $(item)
+      id = item.attr('id')
+      text = $.trim($(item).find('text').html())
+      if item.hasClass('checklist-item')
+        list_level[id] =
+          text: text
+          id: id
+          type: 'checkbox'
+          checked: item.children('i.checkbox').attr('class')
+      else
+        list_level[id] = 
+          text: text
+          id: id
+          type: 'sublist'
+          list: {}
+        listToJSON($(item).find('ul:first'), list_level[id].list)
+
+  window.jsonToList = (element, obj) ->
+    $.each obj, (key, val) ->
+      if val.type == 'sublist'
+        element.append(HandlebarsTemplates['lists/sublist']({value: val.text, id: val.id}))
+        jsonToList(element.find("li[id=#{val.id}]").find('ul:first'), val.list)
+      else
+        element.append(HandlebarsTemplates['lists/checkbox']({value: val.text, id: val.id, checkstate: val.checked}))
+       
+  console.log $('#imported').data('imported')   
+  window.jsonToList($('#list_body'), $('#imported').data('imported'))

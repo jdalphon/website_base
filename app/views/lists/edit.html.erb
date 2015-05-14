@@ -8,7 +8,7 @@
         </div>
         <div class="panel-body">  
           <div id="list_body" class="cursor sortable unstyled">
-              <%= raw @list.body %>
+              
           </div>
         </div>
         
@@ -36,7 +36,7 @@
       </div>
     <% end %>
   </div>
-  
+  <div id="imported" data-imported="<%=@list.body%>"></div>
   <div class="col-xs-4 hidden-xs hidden-sm">
     <div class="well">
       <h4>Sublists<h4>

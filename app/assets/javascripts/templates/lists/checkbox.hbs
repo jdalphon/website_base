@@ -1,5 +1,9 @@
-<li class='checklist-item list-group-item'>
-  <i class='fa fa-square-o checkbox'></i>
+<li class='checklist-item list-group-item' id="{{id}}">
+  {{#if checkstate}}
+    <i class='{{checkstate}}'></i>
+  {{else}}  
+    <i class='fa fa-square-o checkbox'></i>
+  {{/if}}
   <text class='editable'>{{value}}</text>
   <i class='fa fa-times-circle delete-checklist-item'></i>
 </li>

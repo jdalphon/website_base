@@ -9,8 +9,6 @@
     <div id="list_body">
       <% if @list.body == ''%>
         <span class="no_list">No list yet, hit edit to start one</span>
-      <% else %>
-        <%= raw @list.body %>
       <% end %>
     </div>
   </div>
@@ -34,5 +32,7 @@
     </div>
   </div>
 </div>
-  
+<div id="imported" data-imported="<%=@list.body%>"></div>
+
+</div>
 <br/>
