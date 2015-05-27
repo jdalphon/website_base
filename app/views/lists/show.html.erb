@@ -4,11 +4,16 @@
       <%= @list.title %>
     </div>
     <div id="completeness"></div>
+    <% if @list.body.include?('<li class') %>
+      This list format is out of date and can not be updated. 
+    <% end %>
   </div>
   <div class="panel-body">
     <div id="list_body">
       <% if @list.body == ''%>
         <span class="no_list">No list yet, hit edit to start one</span>
+      <% elsif @list.body.include?('<li class')%>
+        <%= raw @list.body%>
       <% end %>
     </div>
   </div>

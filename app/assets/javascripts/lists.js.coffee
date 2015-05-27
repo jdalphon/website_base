@@ -29,7 +29,7 @@ $ ->
     position = $('.cursor')
     if position.hasClass('sublist-title')
       position = position.siblings('ul')
-    checkbox = $(HandlebarsTemplates['lists/checkbox']({value: $('#new_item_text').val()})).uniqueId()
+    checkbox = $(HandlebarsTemplates['lists/checkbox_edit']({value: $('#new_item_text').val(),id: uuid()}))
     position.append(checkbox)
     $('#new_item_text').val('')
     $('#new_item_text').focus()
@@ -41,7 +41,7 @@ $ ->
     position = $('.cursor')
     if position.hasClass('sublist-title')
       position = position.siblings('ul')
-    sublist = $(HandlebarsTemplates['lists/sublist']({value: $('#new_item_text').val()})).uniqueId()
+    sublist = $(HandlebarsTemplates['lists/sublist_edit']({value: $('#new_item_text').val(),id: uuid()}))
     position.append(sublist)
     $('#new_item_text').val('')
     $('#new_item_text').focus()
@@ -110,12 +110,6 @@ $ ->
     e.preventDefault()
     $('.editing').each ()->
       $(this).find('.save-edit').trigger('click')
-    $('i.fa-times-circle').each ()->
-      $(this).show()
-    $('ul').addClass('list-group')  
-    $('li').addClass('list-group-item')  
-    $('.cursor').css('background-color','white')
-    $('.cursor').removeClass('cursor')
     window.list = {}
     listToJSON($('#list_body'), window.list)
     $('#list_body_form').val(JSON.stringify(window.list))
@@ -131,16 +125,10 @@ $ ->
       $(this).siblings('.save-edit').trigger('click')
       return false
    
-  # Do not show delete buttons on show page 
-  if namespace.controller is "lists" and namespace.action is "show"
-    $('i.fa-times-circle').each ()->
-      $(this).hide()
-    $('ul.list-group').removeClass('list-group')
-    $('li.list-group-item').removeClass('list-group-item')
-    
     
   window.list = {}
   window.listToJSON = (obj, list_level) ->
+    console.log item
     for item in obj.children('li')
       item = $(item)
       id = item.attr('id')
@@ -159,13 +147,25 @@ $ ->
           list: {}
         listToJSON($(item).find('ul:first'), list_level[id].list)
 
-  window.jsonToList = (element, obj) ->
+  window.jsonToList = (element, obj, page_type) ->
     $.each obj, (key, val) ->
       if val.type == 'sublist'
-        element.append(HandlebarsTemplates['lists/sublist']({value: val.text, id: val.id}))
-        jsonToList(element.find("li[id=#{val.id}]").find('ul:first'), val.list)
+        element.append(HandlebarsTemplates["lists/sublist_#{page_type}"]({value: val.text, id: val.id}))
+        jsonToList(element.find("li[id=#{val.id}]").find('ul:first'), val.list, page_type)
       else
-        element.append(HandlebarsTemplates['lists/checkbox']({value: val.text, id: val.id, checkstate: val.checked}))
+        element.append(HandlebarsTemplates["lists/checkbox_#{page_type}"]({value: val.text, id: val.id, checkstate: val.checked}))
        
-  console.log $('#imported').data('imported')   
-  window.jsonToList($('#list_body'), $('#imported').data('imported'))
+  if namespace.controller is "lists" and namespace.action is "show"
+    window.jsonToList($('#list_body'), $('#imported').data('imported'), 'show')
+  
+  if namespace.controller is "lists" and namespace.action is "edit"
+    window.jsonToList($('#list_body'), $('#imported').data('imported'), 'edit')
+    
+  #Better then uiniqueId() 
+  window.uuid = () ->
+    d = new Date().getTime()
+    uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) ->
+                                                          r = (d + Math.random()*16)%16 | 0
+                                                          d = Math.floor(d/16)
+                                                          (if c is 'x' then r else (r&0x3|0x8)).toString(16))
+    return uuid
